@@ -56,8 +56,8 @@ async function navigateTo(url, pushState = true) {
     document.body.classList.add('page-transition-exit');
 
     try {
-        // 2. Fetch new content
-        const response = await fetch(url);
+        // 2. Fetch new content (with cache-busting)
+        const response = await fetch(`${url}?t=${Date.now()}`);
         if (!response.ok) throw new Error('Network response was not ok');
         const html = await response.text();
 
