@@ -1,0 +1,771 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;500;700&display=swap');
+
+:root {
+    --bg-color: #050510;
+    --text-main: #e0e0e0;
+    --text-muted: #a0a0a0;
+    --primary: #00f3ff;
+    --primary-rgb: 0, 243, 255;
+    --secondary: #bc13fe;
+    --accent: #ff0055;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.05);
+    --font-display: 'Orbitron', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    /* React Bits Gradient (Teal/Blue) */
+    --text-gradient: linear-gradient(to right, #40ffaa, #4079ff, #40ffaa, #4079ff, #40ffaa);
+}
+
+.text-gradient {
+    background: var(--text-gradient);
+    background-size: 300% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    /* Fallback */
+    animation: gradientFlow 5s ease-in-out infinite alternate;
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+        /* Moves exactly one cycle for seamless loop */
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+#wallpaper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: auto;
+}
+
+/* Utilities */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    /* Apply gradient on hover or by default? Applying default as per request */
+    background: var(--text-gradient);
+    background-size: 300% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Glassmorphism */
+.glass-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 0;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 100;
+}
+
+.glass-header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    background: var(--text-gradient);
+    background-size: 300% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 5s ease-in-out infinite alternate;
+    text-shadow: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a:hover {
+    /* Enhance brightness on hover */
+    filter: brightness(1.2);
+    text-shadow: 0 0 8px var(--primary);
+}
+
+/* Hero Section */
+#hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.glitch-text {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    font-weight: 700;
+    background: var(--text-gradient);
+    background-size: 300% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 5s ease-in-out infinite alternate;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Liquid Glass Button - Refined "Meniscus" Effect */
+.cta-button {
+    position: relative;
+    display: inline-block;
+    margin-top: 30px;
+    padding: 18px 45px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+    background-clip: padding-box, border-box;
+    /* Key for gradient border */
+    -webkit-background-clip: padding-box, border-box;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)) padding-box,
+        linear-gradient(135deg, rgba(0, 243, 255, 0.8), rgba(188, 19, 254, 0.8), rgba(0, 243, 255, 0.8)) border-box;
+    /* Almost invisible base + Gradient Border */
+    border-radius: 999px;
+    /* Max pill */
+    border: 2px solid transparent;
+    /* Transparent to show gradient bg */
+    backdrop-filter: blur(50px) saturate(300%);
+    -webkit-backdrop-filter: blur(50px) saturate(300%);
+    box-shadow:
+        0 0 30px rgba(0, 243, 255, 0.4),
+        inset 0 0 20px rgba(255, 255, 255, 0.1),
+        /* Depth */
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+        /* Sharp top rim */
+        inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+    transition: left 0.6s ease;
+    z-index: -1;
+}
+
+.cta-button:hover {
+    transform: translateY(-4px) scale(1.05);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow:
+        0 20px 50px 0 rgba(0, 243, 255, 0.3),
+        /* Intense glow */
+        inset 0 0 20px rgba(255, 255, 255, 0.1),
+        inset 0 1px 2px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1px 2px 0 rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 1);
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+/* Add a subtle internal glow pulse */
+@keyframes liquidPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+.cta-button:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.section-title {
+    font-family: var(--font-display);
+    background: var(--text-gradient);
+    background-size: 300% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 5s ease-in-out infinite alternate;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    margin-top: 100px;
+}
+
+/* Glass Card */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Skills */
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.skill-tag {
+    background: linear-gradient(45deg, var(--glass-border), rgba(0, 243, 255, 0.1));
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.skill-tag.icon-btn {
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.icon-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+a.skill-tag {
+    -webkit-text-fill-color: var(--primary);
+    background-clip: border-box;
+    -webkit-background-clip: border-box;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.skill-tag:hover {
+    background: var(--primary);
+    color: #000;
+    box-shadow: 0 0 15px var(--primary);
+    transform: translateY(-3px);
+}
+
+/* Projects */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:nth-child(4):nth-last-child(1) {
+    grid-column: 2 / 3;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 40px rgba(0, 243, 255, 0.1);
+    border-color: var(--primary);
+}
+
+.project-card h3 {
+    color: var(--secondary);
+    font-family: var(--font-display);
+    margin-bottom: 10px;
+}
+
+.project-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Contact */
+#contact {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-title {
+    text-align: center;
+}
+
+.contact-form {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 5px;
+    color: #fff;
+    font-family: var(--font-body);
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 10px rgba(188, 19, 254, 0.3);
+}
+
+/* Animations */
+.hidden {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.4s ease-out;
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+section {
+    padding: 80px 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .glitch-text {
+        font-size: 2.5rem;
+    }
+
+    .glass-header nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* Preloader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.preloader-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(0, 243, 255, 0.1);
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 1s linear infinite, glow 2s ease-in-out infinite alternate;
+}
+
+.loading-text {
+    font-family: var(--font-display);
+    background: var(--text-gradient);
+    background-size: 300% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 5s ease-in-out infinite alternate;
+    letter-spacing: 4px;
+    font-size: 1.2rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px var(--primary);
+    }
+
+    to {
+        box-shadow: 0 0 20px var(--primary), 0 0 10px var(--secondary);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Page Entry Animation Removed for Instant Load */
+
+/* --- SPA Page Transitions --- */
+/* We apply transition properties to individual elements to avoid breaking position:fixed context on body */
+#wallpaper,
+.glass-header,
+#app main {
+    transition: filter 0.15s ease, opacity 0.15s ease;
+}
+
+/* Apply blur to components separately */
+body.page-transition-exit #wallpaper,
+body.page-transition-enter #wallpaper,
+body.page-transition-exit .glass-header,
+body.page-transition-enter .glass-header,
+body.page-transition-exit #app main,
+body.page-transition-enter #app main {
+    filter: blur(20px);
+}
+
+/* Hide content during the swap */
+body.page-transition-exit #app main,
+body.page-transition-enter #app main {
+    opacity: 0;
+}
+
+body.page-transition-enter-active #wallpaper,
+body.page-transition-enter-active .glass-header,
+body.page-transition-enter-active #app main {
+    filter: blur(0);
+}
+
+body.page-transition-enter-active #app main {
+    opacity: 1;
+}
+
+/* --- About Page: Timeline --- */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 0 40px;
+    margin-bottom: 40px;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    text-align: left;
+}
+
+.timeline-dot {
+    position: absolute;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    background: var(--bg-color);
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    z-index: 10;
+    box-shadow: 0 0 10px var(--primary);
+}
+
+.timeline-item:nth-child(odd) .timeline-dot {
+    right: -8px;
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+    left: -8px;
+}
+
+.timeline-date {
+    font-family: var(--font-display);
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+/* --- Skills Page: Floating Grid --- */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.skill-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-card:nth-child(7) {
+    grid-column: 2 / 3;
+}
+
+.skill-card:hover {
+    border-color: var(--secondary);
+    box-shadow: 0 0 20px rgba(188, 19, 254, 0.2);
+    transform: translateY(-5px);
+}
+
+.skill-card h3 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--text-main);
+}
+
+/* --- Projects Page: Status Indicators --- */
+.project-status {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.status-live {
+    background: rgba(0, 243, 255, 0.1);
+    color: var(--primary);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+}
+
+.status-dev {
+    background: rgba(255, 0, 85, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(255, 0, 85, 0.3);
+}
+
+/* --- Contact Page: Transmit Button --- */
+.btn-transmit {
+    /* Inherit mostly from cta-button logic manually for now or use the same class */
+    position: relative;
+    padding: 16px 40px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fff;
+    background: rgba(var(--primary-rgb), 0.1);
+    /* Slight tint of primary for this one */
+    border-radius: 50px;
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+        0 8px 32px 0 rgba(0, 0, 0, 0.3),
+        inset 0 0 0 1px rgba(0, 243, 255, 0.1),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    align-self: flex-start;
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+
+.btn-transmit:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: var(--primary);
+    color: #000;
+    box-shadow:
+        0 15px 40px 0 rgba(0, 243, 255, 0.3),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    border-color: transparent;
+}
+
+/* Mobile adjustments for timeline */
+@media (max-width: 600px) {
+    .timeline::before {
+        left: 20px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 50px;
+        padding-right: 20px;
+        text-align: left;
+    }
+
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        left: 0;
+        text-align: left;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot,
+    .timeline-item:nth-child(even) .timeline-dot {
+        left: 12px;
+        right: auto;
+    }
+}
+
+/* --- Custom Cursor --- */
+body,
+a,
+button,
+input,
+textarea {
+    cursor: none;
+}
+
+.custom-cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 10001;
+    transition: transform 0.1s;
+}
+
+.cursor-follower {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 10000;
+    transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
+}
+
+.cursor-follower.active {
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 243, 255, 0.1);
+    border-color: var(--secondary);
+}
+
+.custom-cursor.active {
+    display: none;
+    /* Optional: hide dot on hover if desired, or make it smaller/different color */
+}
