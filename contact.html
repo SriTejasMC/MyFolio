@@ -62,13 +62,13 @@
                         </a>
                     </div>
 
-                    <form onsubmit="event.preventDefault(); alert('Transmission simulated.');">
+                    <form action="https://formsubmit.co/sritejasmc2005@gmail.com" method="POST">
                         <p style="text-align: center; margin-bottom: 20px;">
                             Signal strength is optimal. Send your data packet below.
                         </p>
-                        <input type="text" placeholder="Identity (Name)" required />
-                        <input type="email" placeholder="Communication Channel (Email)" required />
-                        <textarea placeholder="Data Packet (Message)" rows="5" required></textarea>
+                        <input type="text" name="name" placeholder="Identity (Name)" required />
+                        <input type="email" name="email" placeholder="Communication Channel (Email)" required />
+                        <textarea name="message" placeholder="Data Packet (Message)" rows="5" required></textarea>
 
                         <button type="submit" class="btn-transmit">
                             <span style="position: relative; z-index: 2;">Transmit</span>
